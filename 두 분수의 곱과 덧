@@ -1,0 +1,99 @@
+/* 두 분수를 입력받아 분모	ㅜㄴ자 따로 두 분수의 곱고 합을 출력하는프로그램을 만들어 보세요. */
+
+#include <stdio.h>
+
+int main(void)
+{
+	int a_up, a_down, b_up, b_down;
+	int h_up, h_down ,g_up, g_down;
+	int h,g;
+	printf("첫번째 분수의 분자를 입력하세요 :");
+	scanf("%d", &a_up);
+	printf("첫번째 분수의 분모를 입력하세요 :");
+	scanf("%d", &a_down);
+	
+	if(a_down == 0)
+	{
+		while(1)
+		{
+			printf("분모에는 0이 아닌 숫자가 와야합니다. 다시입력하세요 :");
+			scanf("%d", &a_down);
+			if(a_down != 0)
+				break;
+		}
+	}
+
+	printf("두번째 분수의 분자를 입력하세요 :");
+	scanf("%d", &b_up);
+	printf("두번째 분수의 분모를 입력하세요 :");
+	scanf("%d", &b_down);
+
+	if(b_down == 0)
+	{
+		while(1)
+		{
+			printf("분모에는 0이 아닌 숫자가 와야합니다. 다시입력하세요 :");
+			scanf("%d", &b_down);
+			if(b_down != 0)
+				break;
+		}
+	}
+
+	g_down = a_down * b_down;
+	g_up = a_up * b_up;
+
+	h_down = a_down * b_down;
+	h_up = a_up * b_down + b_up * a_down;
+
+
+	// 합 할 차례
+	//1. 위가 아래보다 높고 딱떨어짐
+	if((h_up >= h_down) && (h_up % h_down == 0))
+	{
+		h = h_up / h_down;
+		printf("두 분수의 합은 %d입니다.\n", h);
+	}
+	//2. 아래가 위보도 높고 딱 떨어짐
+	else if((h_up < h_down) && (h_down % h_up == 0))
+	{
+		h_down = h_down / h_up;
+		h_up = 1;
+		printf("두 분수의 합은 %d / %d 입니다. \n", h_up, h_down);
+	}
+	//3. 위가 아래보다 높고 안떨어짐
+	else if((h_up > h_down) && (h_up % h_down != 0))
+	{
+		h = h_up / h_down;
+		h_up = h_up - h*h_down;
+		printf("두 분수의 합은 %d와(과)%d / %d 입니다.\n", h, h_up, h_down);
+	}
+	else
+		printf("두 분수의 합은 %d /  %d 입니다.\n",h_up, h_down);
+
+
+	//곱 할 차례
+	//1. 위가 아래보다 높고 딱떨어짐
+	if((g_up >= g_down) && (g_up % g_down == 0))
+	{
+		g = g_up / g_down;
+		printf("두 분수의 곱은 %d입니다.\n", g);
+	}
+	//2. 아래가 위보도 높고 딱 떨어짐
+	else if((g_up < g_down) && (g_down % g_up == 0))
+	{
+		g_down = g_down / g_up;
+		g_up = 1;
+		printf("두 분수의 곱은 %d / %d 입니다.\n", g_up, g_down);
+	}
+	//3. 위가 아래보다 높고 안떨어짐
+	else if((g_up > g_down) && (g_up % g_down != 0))
+	{
+		g = g_up / g_down;
+		g_up = g_up - g*g_down;
+		printf("두 분수의 곱은 %d와(과)%d / %d 입니다.\n", g, g_up, g_down);
+	}
+	else
+		printf("두 분수의 곱은 %d /  %d 입니다.\n",g_up, g_down);
+		
+	return 0;
+}
